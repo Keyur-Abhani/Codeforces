@@ -23,6 +23,19 @@ void generate(int start)
 	subset.pop_back();
 	return;
 }
+void generateUsingBit()
+{
+	for(int set=0;set<(1<<n);set++)
+	{
+		for(int i=0;i<n;i++)
+		{
+			if((1<<i)&set)
+				cout<<v[i]<<" ";
+
+		}
+		cout<<endl;
+	}
+}
 int32_t main()
 {
 	#ifndef ONLINE_JUDGE
@@ -32,6 +45,6 @@ int32_t main()
 
 	n=v.size();
 
-	generate(0);
+	generateUsingBit();
 
 }
