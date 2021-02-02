@@ -1,5 +1,35 @@
 #include<bits/stdc++.h>
 using namespace std;
+
+const int N=10;
+
+vector<int>v(N);
+
+vector<int>BIT(N);
+int getSum(int num)
+{
+	int sum=0;
+
+	while(num>0)
+	{
+		sum+=BIT[num];
+
+		num=num-(num&(-num));
+	}
+	return sum;
+
+}
+void update(int pos,int num)
+{
+
+	while(pos<N)
+	{
+		BIT[pos]+=num;
+
+		pos=pos+(pos&(-pos));
+	}
+}
+
 int32_t main()
 {
 	#ifndef ONLINE_JUDGE
@@ -7,38 +37,18 @@ int32_t main()
 	    freopen("output.txt", "w", stdout);
     #endif
 
-	vector<int>v {1,3,4,2,5,3,4,2};
+	v={INT_MAX,1,3,4,2,5,3,4,2,9};
+
+	BIT.assign(N,0);
+
+	for(int i=1;i<N;i++)
+		update(i,v[i]);
+
+	cout<<getSum(9)<<endl;
 
 
-	vector<int>ans;
 
 
 
-	// Nearest Smallest Element
 
-
-	stack<int>st;
-
-	st.push(v[0]);
-
-	ans.push_back(-1);
-	for(int i=1;i<v.size();i++)
-	{
-		while(st.empty()==false && st.top()>=v[i])
-			st.pop();
-
-		if(st.empty()==false)
-		{
-			ans.push_back(st.top());
-		}
-		else
-		{
-			ans.push_back(-1);
-		}
-		st.push(v[i]);
-	}
-
-	for(int i=0;i<ans.size();i++)
-		cout<<ans[i]<<" ";
-	cout<<endl;
 }
